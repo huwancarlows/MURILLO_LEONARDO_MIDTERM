@@ -24,10 +24,10 @@ Class StudentController extends Controller {
     public function add(Request $request){ //ADD USER
         
         $rules = [
-            'lastname' => 'required|max:20',
-            'firstname' => 'required|max:20',
-            'middlename' => 'required|max:20',
-            'age' => 'required|max:20'
+            'firstname' => 'required | max:50 | alpha_num ',
+            'lastname' => 'required | max:50 | alpha_num ',
+            'middlename' => 'required | max:50 | alpha_num ',
+            'age' => 'required | gte:49'
         ];
 
         $this->validate($request,$rules);
@@ -38,10 +38,10 @@ Class StudentController extends Controller {
     
     public function updateUser(Request $request, $id) { //UPDATE USER
         $rules = [
-            'lastname' => 'required|max:20',
-            'firstname' => 'required|max:20',
-            'middlename' => 'required|max:20',
-            'age' => 'required|max:20'
+            'firstname' => 'required | max:50 | alpha_num ',
+            'lastname' => 'required | max:50 | alpha_num ',
+            'middlename' => 'required | max:50 | alpha_num ',
+            'age' => 'required | gte:49'
         ];
     
         $this->validate($request, $rules);
@@ -79,6 +79,6 @@ Class StudentController extends Controller {
         }
         
     }
-}   
 
-
+    
+}
