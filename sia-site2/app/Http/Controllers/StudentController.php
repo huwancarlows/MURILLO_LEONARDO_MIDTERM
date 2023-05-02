@@ -27,36 +27,13 @@ Class StudentController extends Controller {
             'firstname' => 'required | max:50 | alpha_num ',
             'lastname' => 'required | max:50 | alpha_num ',
             'middlename' => 'required | max:50 | alpha_num ',
-            'age' => 'required | gte:49'
+            'age' => 'required | lte:49'
         ];
 
         $this->validate($request,$rules);
 
         $user = User::create($request->all());
         return response()->json($user, 200);
-    }
-    
-    public function updateUser(Request $request, $id) { //UPDATE USER
-        $rules = [
-            'firstname' => 'required | max:50 | alpha_num ',
-            'lastname' => 'required | max:50 | alpha_num ',
-            'middlename' => 'required | max:50 | alpha_num ',
-            'age' => 'required | gte:49'
-        ];
-    
-        $this->validate($request, $rules);
-    
-        $user = User::findOrFail($id);
-    
-        $user->fill($request->all());
-    
-        if ($user->isClean()) {
-            return response()->json("At least one value must
-            change", 403);
-        } else {
-            $user->save();
-            return response()->json($user, 200);
-        }
     }
 
     public function deleteUser($id) { // DELETE USER
@@ -80,5 +57,23 @@ Class StudentController extends Controller {
         
     }
 
+    public function updateUser(Request $request, $id)
+    {
+
+        $users = User::where('studid', $id)->firstOrFail();
+        $rules = [
+            $this->validate($request, [
+                'firstname' => 'required | max:50 | alpha_num ',
+                'lastname' => 'required | max:50 | alpha_num ',
+                'middlename' => 'required | max:50 | alpha_num ',
+                'age' => 'required | lte:49'
+            ])
+        ];
+        $this->validate($request, $rules);
+        $users->fill($request->all());
+        $users->save();
+
+        return $users;
+    }
     
 }

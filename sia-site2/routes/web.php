@@ -21,5 +21,5 @@ $router->get('/', function () use ($router) {
 $router->get('/users',['uses' => 'StudentController@getUsers']);
 $router->get('/users/{id}',['uses' => 'StudentController@show']);  
 $router->post('/users',['uses' => 'StudentController@add']);
-$router->patch('/users/{id}',['uses' => 'StudentController@updateUser']);
+$router->put('/users/{id}',['uses' => 'StudentController@updateUser']);
 $router->delete('/users/{id}',['uses' => 'StudentController@deleteUser']);

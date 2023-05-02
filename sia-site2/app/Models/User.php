@@ -10,6 +10,6 @@
         ];
 
         public $timestamps = false;
-        protected $primarykey = 'studid';
+        protected $primaryKey = 'studid';
     }
 
